@@ -29,7 +29,8 @@ const page = usePage<SharedData>();
 const user = page.props.auth.user as User;
 
 const form = useForm({
-    name: user.name,
+    firstname: user.firstname,
+    lastname: user.lastname,
     email: user.email,
 });
 
@@ -50,9 +51,15 @@ const submit = () => {
 
                 <form @submit.prevent="submit" class="space-y-6">
                     <div class="grid gap-2">
-                        <Label for="name">Name</Label>
-                        <Input id="name" class="mt-1 block w-full" v-model="form.name" required autocomplete="name" placeholder="Full name" />
-                        <InputError class="mt-2" :message="form.errors.name" />
+                        <Label for="name">Firstname</Label>
+                        <Input id="name" class="mt-1 block w-full" v-model="form.firstname" required autocomplete="name" placeholder="Firstname" />
+                        <InputError class="mt-2" :message="form.errors.firstname" />
+                    </div>
+                    
+                    <div class="grid gap-2">
+                        <Label for="lastname">Lastname</Label>
+                        <Input id="lastname" class="mt-1 block w-full" v-model="form.lastname" required autocomplete="name" placeholder="Lastname" />
+                        <InputError class="mt-2" :message="form.errors.lastname" />
                     </div>
 
                     <div class="grid gap-2">

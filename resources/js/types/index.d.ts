@@ -16,6 +16,7 @@ export interface NavItem {
     href: string;
     icon?: LucideIcon;
     isActive?: boolean;
+    disabled?: boolean;
 }
 
 export interface SharedData extends PageProps {
@@ -28,10 +29,13 @@ export interface SharedData extends PageProps {
 
 export interface User {
     id: number;
-    name: string;
+    firstname: string;
+    lastname: string;
     email: string;
     avatar?: string;
     email_verified_at: string | null;
+    phone_number: string | null;
+    enabled: boolean;
     created_at: string;
     updated_at: string;
 }
