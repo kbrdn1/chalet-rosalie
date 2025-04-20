@@ -1,43 +1,34 @@
 services: 
-    # chalet-rosalie-rosalie:
-    #     image: chalet-rosalie:latest
-    #     ports:
-    #         - '8000:8000'
-    #     environment:
-    #         APP_ENV: production
-    #         APP_DEBUG: false
-    #         WWWUSER: '${WWWUSER}'
-    #         WWWGROUP: '${WWWGROUP}'
-    #         DB_HOST: mysql
-    #         REDIS_HOST: redis
-    #         MINIO_HOST: minio
-    #         MINIO_ROOT_USER: ${MINIO_ROOT_USER}
-    #         MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
-    #         MINIO_BUCKET: ${AWS_BUCKET}
-    #         MINIO_ACCESS_KEY: ${AWS_ACCESS_KEY_ID}
-    #         MINIO_SECRET_KEY: ${AWS_SECRET_ACCESS_KEY}
-    #         FORWARD_MINIO_PORT: ${FORWARD_MINIO_PORT}
-    #         APP_FRONTEND_URL: ${APP_FRONTEND_URL}
-    #     depends_on:
-    #         - mysql-rosalie
-    #         - redis-rosalie
-    #         - minio-rosalie
-    #     networks:
-    #         - sail-rosalie
+    chalet-rosalie:
+        image: chalet-rosalie:latest
+        ports:
+            - '8000:8000'
+        environment:
+            APP_ENV: production
+            APP_DEBUG: false
+            WWWUSER: '${WWWUSER}'
+            WWWGROUP: '${WWWGROUP}'
+            DB_HOST: mysql-rosalie
+        depends_on:
+            - mysql-rosalie
+            # - redis-rosalie
+            # - minio-rosalie
+        networks:
+            - sail-rosalie
 
-    # nginx-rosalie:
-    #     image: nginx:alpine
-    #     ports:
-    #       - "80:80"
-    #       - "443:443"  # Pour HTTPS
-    #     volumes:
-    #       - ./docker/nginx/conf.d:/etc/nginx/conf.d
-    #       - ./docker/nginx/ssl:/etc/nginx/ssl
-    #       - ./:/var/www/app
-    #     networks:
-    #       - sail-rosalie
-    #     depends_on:
-    #       - mysql-rosalie
+    nginx-rosalie:
+        image: nginx:alpine
+        ports:
+          - "80:80"
+          - "443:443"  # Pour HTTPS
+        volumes:
+          - ./docker/nginx/conf.d:/etc/nginx/conf.d
+          - ./docker/nginx/ssl:/etc/nginx/ssl
+          - ./:/var/www/app
+        networks:
+          - sail-rosalie
+        depends_on:
+          - mysql-rosalie
 
     mysql-rosalie:
         image: 'mysql/mysql-server:8.0'
