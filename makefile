@@ -1,4 +1,4 @@
-.PHONY: help install env ssl setup-hosts sail-up sail-up-local sail-down build-sail build-sail-local app-shell migrate seed fresh-seed serve test test-coverage generate-git-log generate-full-git-log generate-project-structure setup format
+.PHONY: help install env ssl setup-hosts sail-up sail-up-local sail-down build-sail build-sail-local chalet-rosalie-shell migrate seed fresh-seed serve test test-coverage generate-git-log generate-full-git-log generate-project-structure setup format
 
 # Colors
 GREEN = \033[0;32m
@@ -68,7 +68,7 @@ sail-down: ## Stop Laravel Sail
 build: ssl ## Docker build
 	@echo "${YELLOW}Building Docker image...${NC}"
 	@if [ -f .env ]; then \
-				docker build --no-cache -t app .; \
+				docker build --no-cache -t chalet-rosalie .; \
 				echo "${GREEN}Docker image built successfully!${NC}"; \
 		else \
 				echo "${RED}Error: Setup not completed!${NC}"; \
@@ -79,7 +79,7 @@ build: ssl ## Docker build
 build-cache: ssl ## Docker build with cache
 	@echo "${YELLOW}Building Docker image...${NC}"
 	@if [ -f .env ]; then \
-				docker build -t app .; \
+				docker build -t chalet-rosalie .; \
 				echo "${GREEN}Docker image built successfully!${NC}"; \
 		else \
 				echo "${RED}Error: Setup not completed!${NC}"; \
@@ -90,7 +90,7 @@ build-cache: ssl ## Docker build with cache
 build-local: ssl ## Docker build with local environment
 	@echo "${YELLOW}Building Docker image with local environment...${NC}"
 	@if [ -f .env.local ]; then \
-	docker build --no-cache -t app -f local.Dockerfile .; \
+	docker build --no-cache -t chalet-rosalie -f local.Dockerfile .; \
 		echo "${GREEN}Docker image built successfully!${NC}"; \
 	else \
 				echo "${RED}Error: Setup not completed!${NC}"; \
@@ -98,7 +98,7 @@ build-local: ssl ## Docker build with local environment
 				exit 1; \
 		fi
 
-app-shell: ## Open a terminal in the App container
+chalet-rosalie-shell: ## Open a terminal in the App container
 	@echo "${YELLOW}Opening a terminal in the App container...${NC}"
 	@if docker ps | grep -q fp-api-rest; then \
 		docker exec -it fp-api-rest zsh || docker exec -it fp-api-rest bash; \
@@ -124,8 +124,8 @@ fresh-seed: ## Run fresh migrations with seeders
 	php artisan migrate:fresh --seed
 	@echo "${GREEN}Fresh migrations with seeders completed successfully!${NC}"
 
-serve: ## Run the application
-	@echo "${YELLOW}Starting the application...${NC}"
+serve: ## Run the chalet-rosalielication
+	@echo "${YELLOW}Starting the chalet-rosalielication...${NC}"
 	php artisan serve
 	@echo "${GREEN}Application stopped.${NC}"
 
@@ -179,4 +179,4 @@ setup: install env ssl ## Complete setup: install dependencies, create .env, gen
 	@echo "2. Run '${GREEN}make sail-up${NC}' to start Laravel Sail"
 	@echo "3. Run '${GREEN}make migrate${NC}' to run migrations"
 	@echo "4. Run '${GREEN}make seed${NC}' to run seeders"
-	@echo "5. Access your application at ${BLUE}https://<host>${NC}"
+	@echo "5. Access your chalet-rosalielication at ${BLUE}https://<host>${NC}"

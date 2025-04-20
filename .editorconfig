@@ -3,10 +3,12 @@ root = true
 [*]
 charset = utf-8
 end_of_line = lf
-indent_size = 4
+indent_size = 2
 indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
+max_line_length = 100
+quote_type = double
 
 [*.md]
 trim_trailing_whitespace = false
@@ -15,4 +17,20 @@ trim_trailing_whitespace = false
 indent_size = 2
 
 [docker-compose.yml]
-indent_size = 4
+indent_size = 2
+
+[*.{json,html}]
+indent_size = 2
+quote_type = double
+
+[*.{js,jsx,ts,tsx,vue}]
+indent_size = 2
+quote_type = double
+
+[*.{css,scss,sass}]
+indent_size = 2
+quote_type = double
+
+[*.{sh,bat}]
+indent_size = 2
+quote_type = double
